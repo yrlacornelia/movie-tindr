@@ -8,21 +8,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <title>Document</title>
+    <link href='https://fonts.googleapis.com/css?family=Ibarra Real Nova' rel='stylesheet'>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>MOVIE CHOOSER</h1>
+    <div class="header">
+      <i class="fa-solid fa-clapperboard fa-xl"></i>
+       <h2>MOVIE CHOOSER</h2></div>
+   
 
     <div id="filter">
       <form>
-        <label for="participants">Participants</label><br />
-        <input type="number" id="participants" /><br />
-        <label for="movies-total">movies to choose from</label><br />
-        <input type="number" id="movies-total" />
+        <div class="form">
+          <input class="input" id="participants" placeholder="Participants" required="" type="number">
+          <span class="input-border"></span>
+        </div>
+        <div class="form">
+          <input class="input" id="movies-total"  placeholder="Movies" required="" type="number">
+          <span class="input-border"></span>
+        </div>
       </form>
       <button id="start-button" data-text="Awesome" class="button">
-        <span class="actual-text">&nbsp;Begin&nbsp;</span>
-        <span class="hover-text" aria-hidden="true">&nbsp;Begin&nbsp;</span>
+       Begin
       </button>
     </div>
 
@@ -30,9 +37,13 @@
       <div class="like-btns" id="dislike-btn"><i class="fa-solid fa-thumbs-down fa-xl"></i></div>
       <div id="movie-container"></div>
       <div class="like-btns" id="like-btn"><i class="fa-solid fa-thumbs-up fa-xl"></i></div>
-     
-    </div> <button id="next-person">next participant</button>
+    </div> 
+    <div id="winner-movie-container"></div>
+    <div class="buttonss">
+    <button id="next-person">next participant</button>
     <button id="show-winners">show winners</button>
+  </div>
+  <div id="food-test"></div>
   </body>
   <script src="index.js"></script>
 </html>

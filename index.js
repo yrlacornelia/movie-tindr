@@ -1,6 +1,3 @@
-
-
-
 const randomMovieContainer = document.getElementById("movie-container");
 const startButton = document.getElementById(`start-button`);
  const btnLeft = document.getElementById("dislike-btn");
@@ -10,12 +7,20 @@ const showWinnersBtn = document.getElementById("show-winners");
 const moviesTotal = document.getElementById("movies-total");
 const participants = document.getElementById("participants");
 const rating = document.getElementById("rating-container");
+const winnerContainer = document.getElementById("winner-movie-container")
 const filter = document.getElementById("filter");
 btnLeft.addEventListener("click", nextImage);
 btnRight.addEventListener("click", nextImageWin);
 nextPersonBtn.addEventListener("click", newPersonChoose);
 showWinnersBtn.addEventListener("click", showWinners);
-
+const foodContainer = document.getElementById("food-test")
+// async function getRandommoviesss(movies) { 
+//   const response = await fetch(``);
+//  const data =  await response.json()
+//  const films = data
+// console.log(films)
+// }
+// getRandommoviesss()
 //   async function fetchMovies() {
 //     const response = await fetch//(``);
 //     const data =  await response.json()
@@ -29,6 +34,50 @@ showWinnersBtn.addEventListener("click", showWinners);
 //     console.log(data.items)
 
 // }
+
+let arraytest = [
+
+  {"title": "this is us",
+      "color": "purple",
+  "type": "minivan",
+  "capacity": 1
+},
+{"title": "love u ",
+  "color": "purple",
+  "type": "minivan",
+  "capacity": 2
+},
+{"title": "coool ",
+  "color": "purple",
+"type": "minivan",
+"capacity": 3
+},
+{"title": "im fine ",
+"color": "purple",
+"type": "minivan",
+"capacity": 4
+},
+{"title": "lololo ",
+"color": "purple",
+"type": "minivan",
+"capacity": 5
+},
+{"title": "waxxup ",
+"color": "purple",
+"type": "minivan",
+"capacity": 6
+},
+{"title": "five minutes ",
+"color": "purple",
+"type": "minivan",
+"capacity": 7
+},
+{"title": "harry potter  ",
+"color": "purple",
+"type": "minivan",
+"capacity": 8
+}
+]
 
 startButton.addEventListener(`click`, () => 
 {
@@ -46,8 +95,10 @@ let array = [];
 
 function getRandommovie(movies) {  
   for (let i = 0; i < movies; i++) {
-    const item = Math.floor(Math.random() * 250);
-    array.push(item);
+    const item = Math.floor(Math.random() * 5);
+    array.push(arraytest[item]);
+    console.log(item)
+    console.log(array)
   }  
 }
 
@@ -69,12 +120,16 @@ function nextImage() {
 if (currentIndex  == amountOfarray  ) {
   if(users == id){
     console.log("yttutu")
+    console.log(winArray)
+    showWinnersBtn.style.display = "flex"
+
+  rating.style.display = "none";
       }  
  else  {
          id++;
        console.log("HU")
        console.log(winArray)
-       
+  rating.style.display = "none";
     nextPerson();}
   }   else {
     console.log(winArray)
@@ -82,8 +137,6 @@ if (currentIndex  == amountOfarray  ) {
 
     //Show next person btn
   }
-
-
   //Show next person btn
 }
 let winArray = [];
@@ -140,7 +193,7 @@ function newPersonChoose() {
 }
 
 function updateImage() {
-  randomMovieContainer.innerHTML = array[currentIndex];
+  randomMovieContainer.innerHTML = array[currentIndex].title;
   console.log(array)    
     currentIndex++;
 }
@@ -148,12 +201,25 @@ function updateImage() {
 function showWinners() {
 
   showWinnersBtn.style.display = "none"
-  rating.style.display = "flex";
+  rating.style.display = "none";
+  winnerContainer.style.display= "flex"
+  if (winArray.length === 0) {
+winnerContainer.innerHTML = "You have no matches"
+  }
+  else{
   const toFindDuplicates = (winArray) =>
     winArray.filter((item, index) => winArray.indexOf(item) !== index);
   const duplicateElements = toFindDuplicates(winArray);
   console.log(duplicateElements);
-  randomMovieContainer.innerHTML = duplicateElements;
+  for (let i = 0; i < duplicateElements.length; i++) {
+ const newDiv = document.createElement("div");
+  const newContent = document.createTextNode(duplicateElements[i].title);
+
+ newDiv.appendChild(newContent);
+ document.body.insertBefore(newDiv, winnerContainer);
+  }
+ }
+
 }
 
 
@@ -163,16 +229,13 @@ function getUser() {
  }
 
 
-//  likeBtn.onclick = () => rateMovie('likes', movieInfo);
-// dislikeBtn.onclick = () => rateMovie('dislikes', movieInfo);
-//  const ratings = {
-//   likes: [],
-//   dislikes: [],
-// };
-
-// const rateMovie = (type, data) => {
-//     ratings[type].push(data);
-//     clearCurrentMovie();
-//     showRandomMovie();
-// };
-
+    function apiCall(){
+      fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+      .then(response => response.json())
+      .then(jsonResponse => {
+          console.log(jsonResponse)
+  });}
+  
+  for (let index = 0; index < 1; index++) {
+      apiCall();
+  }
