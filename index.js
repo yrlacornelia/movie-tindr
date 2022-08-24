@@ -79,6 +79,8 @@ let arraytest = [
 }
 ]
 
+console.log(arraytest)
+
 startButton.addEventListener(`click`, () => 
 {
   var users = participants.value;
@@ -93,16 +95,26 @@ updateImage()
 
 let array = [];
 
+
 function getRandommovie(movies) {  
   for (let i = 0; i < movies; i++) {
-    const item = Math.floor(Math.random() * 5);
-    array.push(arraytest[item]);
-    console.log(item)
-    console.log(array)
+    apiCall();
   }  
 }
 
+async function apiCall() { 
+  const fetchPromise = fetch(`https://www.themealdb.com/api/json/v1/1/random.php`);
 
+  fetchPromise.then((response) => {
+    const jsonPromise = response.json();
+    jsonPromise.then((jsonPromise) => {
+      console.log(jsonPromise); 
+       array.push(jsonPromise.meals[0].strMeal)
+    });
+  });
+
+
+ }
 
 //randomerare 250
 
@@ -166,7 +178,6 @@ if (currentIndex  == amountOfarray  ) {
     winArray.push(array[currentIndex -1]);
     console.log(winArray)
     updateImage();
-
     //Show next person btn
   }
 }
@@ -193,10 +204,14 @@ function newPersonChoose() {
 }
 
 function updateImage() {
-  randomMovieContainer.innerHTML = array[currentIndex].title;
-  console.log(array)    
+
+  console.log(array.length)
+  console.log(array)
     currentIndex++;
+    
 }
+
+
 
 function showWinners() {
 
@@ -229,13 +244,5 @@ function getUser() {
  }
 
 
-    function apiCall(){
-      fetch('https://www.themealdb.com/api/json/v1/1/random.php')
-      .then(response => response.json())
-      .then(jsonResponse => {
-          console.log(jsonResponse)
-  });}
-  
-  for (let index = 0; index < 1; index++) {
-      apiCall();
-  }
+
+ //mealname jsonResponse.meals[0].strMeal
